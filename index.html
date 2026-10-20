@@ -72,8 +72,9 @@ let bookings={}; try{bookings=JSON.parse(localStorage.getItem("shinezone_booking
 let selectedDay="Martes", editingKey=null;
 function key(d,t){return d+"_"+t}
 function whatsappLink(b,d,t){
- const phone=String(b.phone||"").replace(/\\D/g,"");
- const message=`Hola ${b.name}, ¿cómo estás? Te escribimos de ShineZone Detail para recordarte tu turno de ${b.service||"detailing"} el día ${d} a las ${t}. ¡Te esperamos!`;
+ const phone=String(b.phone||"").replace(/\D/g,"");
+ const message=`Hola!, ¿cómo estás? Te escribo para recordarte que mañana tenés turno a las ${t}.`;
+ if(!/^\d{8,15}$/.test(phone)){alert("Revisá el número de WhatsApp. Ingresalo con código de país y área, solo números. Ejemplo Argentina: 5492211234567.");return "#";}
  return "https://wa.me/"+phone+"?text="+encodeURIComponent(message);
 }
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
